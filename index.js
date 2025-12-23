@@ -13,6 +13,11 @@ function getComputerChoice() {
 	return "paper";
 }
 
-for (let i=0; i < 10; i++) {
-	console.log(getComputerChoice());
+function getHumanChoice() {
+	// Prompt the user to enter a choice between "rock", "paper", and "scissors"
+	// Save the choice in a variable
+	const choice = prompt("Enter a choice between 'rock', 'paper', and 'scissors'");
+	return choice;
 }
+
+console.log(getHumanChoice());
