@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoice() {
 	// Randomly generate a number between 0 and 1
 	randNum = Math.random()
@@ -20,4 +23,53 @@ function getHumanChoice() {
 	return choice;
 }
 
-console.log(getHumanChoice());
+function playRound(humanChoice, computerChoice) {
+	humanChoice = humanChoice.toLowerCase();
+	if (humanChoice === "rock") {
+		if (computerChoice === "rock") {
+			console.log("You draw! You both picked 'rock'");	
+		}
+		else if (computerChoice === "paper") {
+			console.log("You lose! Paper beats Rock");
+			computerScore += 1;
+		}
+		else {
+			console.log("You win! Rock beats Scissors");
+			humanScore += 1;
+		}
+	}
+	else if (humanChoice === "paper") {
+		if (computerChoice === "rock") {
+			console.log("You win! Paper beats Rock");	
+			humanScore += 1;
+		}
+		else if (computerChoice === "paper") {
+			console.log("You draw! You both picked Paper");
+		}
+		else {
+			console.log("You lose! Scissors beats paper");
+			computerScore += 1;
+		}
+
+	}
+	else {
+		if (computerChoice === "rock") {
+			console.log("You lose! Rock beats Scissors");	
+			computerScore += 1;
+		}
+		else if (computerChoice === "paper") {
+			console.log("You win! Scissors beats Paper");
+			humanScore += 1;
+		}
+		else {
+			console.log("You draw! You both picked Scissors");
+
+		}
+
+	}
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
