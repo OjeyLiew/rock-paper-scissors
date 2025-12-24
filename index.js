@@ -1,3 +1,5 @@
+humanScore = 0;
+computerScore = 0;
 
 function getComputerChoice() {
 	// Randomly generate a number between 0 and 1
@@ -21,6 +23,51 @@ function getHumanChoice() {
 	return choice;
 }
 
+function playRound(humanChoice, computerChoice) {
+	humanChoice = humanChoice.toLowerCase();
+	if (humanChoice === "rock") {
+		if (computerChoice === "rock") {
+			console.log("You draw! You both picked Rock");	
+		}
+		else if (computerChoice === "paper") {
+			console.log("You lose! Paper beats Rock");
+			computerScore += 1;
+		}
+		else {
+			console.log("You win! Rock beats Scissors");
+			humanScore += 1;
+		}
+	}
+	else if (humanChoice === "paper") {
+		if (computerChoice === "rock") {
+			console.log("You win! Paper beats Rock");	
+			humanScore += 1;
+		}
+		else if (computerChoice === "paper") {
+			console.log("You draw! You both picked Paper");
+		}
+		else {
+			console.log("You lose! Scissors beats paper");
+			computerScore += 1;
+		}
+
+	}
+	else {
+		if (computerChoice === "rock") {
+			console.log("You lose! Rock beats Scissors");	
+			computerScore += 1;
+		}
+		else if (computerChoice === "paper") {
+			console.log("You win! Scissors beats Paper");
+			humanScore += 1;
+		}
+		else {
+			console.log("You draw! You both picked Scissors");
+
+		}
+
+	}
+}
 
 function playGame(rounds = 5) {
 	function playRound(humanChoice, computerChoice) {
@@ -80,4 +127,36 @@ function playGame(rounds = 5) {
 	}
 }
 
-playGame();
+const buttCallback = (humanChoice) => (event) => {
+	playRound(humanChoice, getComputerChoice());
+	score.textContent = "Human Score: " + humanScore + "; Computer Score: " + computerScore;
+	if (humanScore >= 5) {
+		result.textContent = "You won!";
+	}
+	else if (computerScore >= 5) {
+		result.textContent = "You lost!";
+	}
+
+}
+
+const rockButt = document.createElement("button");
+const papButt = document.createElement("button");
+const scissButt = document.createElement("button");
+const res = document.createElement("div");
+const score = document.createElement("p");
+const result = document.createElement("p");
+rockButt.textContent = "Rock"
+papButt.textContent = "Paper"
+scissButt.textContent = "Scissors"
+score.textContent = "Human Score: 0; Computer Score: 0";
+rockButt.addEventListener("click", buttCallback("rock")); 
+papButt.addEventListener("click", buttCallback("paper")); 
+scissButt.addEventListener("click", buttCallback("scissors")); 
+
+res.appendChild(score);
+res.appendChild(result);
+bod = document.querySelector("body");
+bod.appendChild(rockButt);
+bod.appendChild(papButt);
+bod.appendChild(scissButt);
+bod.appendChild(res);
